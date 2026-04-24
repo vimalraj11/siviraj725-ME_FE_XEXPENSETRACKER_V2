@@ -1,29 +1,34 @@
-import type { Expense } from '../../types/expense';
-import ExpenseItem from './ExpenseItem';
+import type { Expense } from "../../types/expense";
+import ExpenseItem from "./ExpenseItem";
 
 type ExpenseListProps = {
   expenses: Expense[];
+  onDelete: (id: string) => void;
   onEdit: (expense: Expense) => void;
-  onDelete: (expenseId: string) => void;
 };
 
-export default function ExpenseList({ expenses, onEdit, onDelete }: ExpenseListProps) {
+export default function ExpenseList({
+  expenses,
+  onDelete,
+  onEdit,
+}: ExpenseListProps) {
   return (
-    <section className="panel history-panel">
-      <h2>Expense History</h2>
+    <section className="transaction-section">
+      <h2>Transactions</h2>
+
       {expenses.length === 0 ? (
-        <p className="empty-text">No expenses added yet.</p>
+        <p className="empty-text">No transactions</p>
       ) : (
-        <ul className="expense-list">
+        <div className="transaction-list">
           {expenses.map((expense) => (
             <ExpenseItem
               key={expense.id}
               expense={expense}
-              onEdit={onEdit}
               onDelete={onDelete}
+              onEdit={onEdit}
             />
           ))}
-        </ul>
+        </div>
       )}
     </section>
   );
